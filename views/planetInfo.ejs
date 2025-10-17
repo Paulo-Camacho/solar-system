@@ -30,14 +30,36 @@
         </div>
     </nav>
 
-    <h2>
-        <%= planetName %>
-    </h2>
-
+    <h1><%= planetName %></h1>
+    <hr>
     <!-- Displaying info from an API -->
-    <p>
-        <%= planetInfo.description %>
-    </p>
+        <h3>distanceFromSun</h3>
+        <%= planetInfo.distanceFromSun%>
+        <br>
+        <br>
+        <h3>yearLength</h3>
+        <%= planetInfo.yearLength%>
+        <br>
+        <br>
+        <h3>description</h3>
+        <%= planetInfo.description%>
+        <br>
+        <br>
+        <h3>radius</h3>
+        <%= planetInfo.radius%>
+        <br>
+        <br>
+        <h3>websiteLink</h3>
+        <%= planetInfo.websiteLink%>
+        <br>
+        <br>
+        <h3>oneEarthDay</h3>
+        <%= planetInfo.oneEarthDay%>
+        <br>
+        <br>
+        <h3>moons</h3>
+        <%= planetInfo.moons%>
+        <br>
     <br>
 
     <!-- Displaying images with an API -->

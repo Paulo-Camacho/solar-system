@@ -17,10 +17,6 @@ app.get("/", async (req, res) => {
   res.render("home.ejs", {randomImage});
 });
 
-// Nasa route
-app.get('/nasapod', (req, res) => {
-    res.render('nasapod.ejs');
-});
 
 
 
@@ -58,9 +54,11 @@ app.get('/planet', (req, res) =>  {
     let planetName = req.query.planetName; // match the URL query param
     let methodName = `get${planetName}`;
 
+
     // The method in class did not work and I had to make a variable inherit the string literal
     if (typeof solarSystem[methodName] === 'function') {
         let planetInfo = solarSystem[methodName]();
+        console.log(planetInfo);
         res.render('planetInfo.ejs', { planetInfo, planetName });
     } else {
         res.status(404).send('Planet not found');
