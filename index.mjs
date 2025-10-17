@@ -12,9 +12,17 @@ app.get("/", async (req, res) => {
 		let response = await fetch(url);
 		let data = await response.json();
 		console.log(data);
-		let randomImage = data.hits[0].webformatURL;
+        let x = Math.floor(Math.random() * 50);
+		let randomImage = data.hits[x].webformatURL;
   res.render("home.ejs", {randomImage});
 });
+
+// Nasa route
+app.get('/nasapod', (req, res) => {
+    res.render('nasapod.ejs');
+});
+
+
 
 app.listen(3000, () => {
    console.log('server started');
