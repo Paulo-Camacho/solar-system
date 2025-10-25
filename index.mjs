@@ -72,4 +72,10 @@ app.get('/', (req, res) =>  {
     console.log(planetInfo);
     // Passing the object such that we can display it to the HTML
     res.render('home.ejs', {planetInfo})
-})
+});
+
+
+// The goverment is still shut down
+// app.get("/nasapod", async(req, res) => {
+//   const url = 
+// });
