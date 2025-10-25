@@ -24,21 +24,21 @@ app.listen(3000, () => {
    console.log('server started');
 });
 
-app.get('/mercury', (req, res) =>  {
-    let planetInfo = solarSystem.getMercury();
-    console.log(planetInfo);
-    // Passing the object such that we can display it to the HTML
-    res.render('mercury.ejs', {planetInfo})
-})
-
-
-
-app.get('/venus', (req, res) =>  {
-    let planetInfo = solarSystem.getVenus();
-    console.log(planetInfo);
-    // Passing the object such that we can display it to the HTML
-    res.render('venus.ejs', {planetInfo})
-})
+// app.get('/mercury', (req, res) =>  {
+//     let planetInfo = solarSystem.getMercury();
+//     console.log(planetInfo);
+//     // Passing the object such that we can display it to the HTML
+//     res.render('mercury.ejs', {planetInfo})
+// })
+//
+//
+//
+// app.get('/venus', (req, res) =>  {
+//     let planetInfo = solarSystem.getVenus();
+//     console.log(planetInfo);
+//     // Passing the object such that we can display it to the HTML
+//     res.render('venus.ejs', {planetInfo})
+// })
 
 // ROUTE
 // Getting paramerter and defining the route. That is different from the file that is being made at the end of the method
@@ -50,19 +50,54 @@ app.get('/venus', (req, res) =>  {
 // })
 
 
-app.get('/planet', (req, res) =>  {
-    let planetName = req.query.planetName; // match the URL query param
-    let methodName = `get${planetName}`;
+// app.get('/planet', (req, res) =>  {
+//     let planetName = req.query.planetName; // match the URL query param
+//     let methodName = `get${planetName}`;
+//     // The method in class did not work and I had to make a variable inherit the string literal
+//     if (typeof solarSystem[methodName] === 'function') {
+//         let planetInfo = solarSystem[methodName]();
+//         console.log(planetInfo);
+//         res.render('planetInfo.ejs', { planetInfo, planetName });
+//     } else {
+//         res.status(404).send('Planet not found');
+//     }
+// });
+//
+//
+//
+//
+app.get('/planet', (req, res) => {
+    const planetName = req.query.planetName;
+    let planetInfo;
 
-
-    // The method in class did not work and I had to make a variable inherit the string literal
-    if (typeof solarSystem[methodName] === 'function') {
-        let planetInfo = solarSystem[methodName]();
-        console.log(planetInfo);
-        res.render('planetInfo.ejs', { planetInfo, planetName });
+    if (planetName === "Comets" && typeof solarSystem.getComets === "function") {
+        planetInfo = solarSystem.getComets();
+        planetInfo.description = planetInfo.def;
+        planetInfo.websiteLink = planetInfo.link;
+        planetInfo.distanceFromSun = "N/A";
+        planetInfo.yearLength = "N/A";
+        planetInfo.radius = "N/A";
+        planetInfo.oneEarthDay = "N/A";
+        planetInfo.moons = "N/A";
+    } else if (planetName === "Asteroids" && typeof solarSystem.getAsteroids === "function") {
+        planetInfo = solarSystem.getAsteroids();
+        planetInfo.description = planetInfo.def;
+        planetInfo.websiteLink = planetInfo.link;
+        planetInfo.distanceFromSun = "N/A";
+        planetInfo.yearLength = "N/A";
+        planetInfo.radius = "N/A";
+        planetInfo.oneEarthDay = "N/A";
+        planetInfo.moons = "N/A";
     } else {
-        res.status(404).send('Planet not found');
+        const methodName = `get${planetName}`;
+        if (typeof solarSystem[methodName] === "function") {
+            planetInfo = solarSystem[methodName]();
+        } else {
+            return res.status(404).send("Something went wrong");
+        }
     }
+
+    res.render("planetInfo.ejs", { planetInfo, planetName });
 });
 
 // How would I render back home.ejs
@@ -77,5 +112,5 @@ app.get('/', (req, res) =>  {
 
 // The goverment is still shut down
 // app.get("/nasapod", async(req, res) => {
-//   const url = 
+//   const url = inde
 // });
