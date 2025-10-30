@@ -87,14 +87,3 @@ p {
     margin-bottom: 15px;
     line-height: 1.5;
 }
-
-@media (max-width: 768px) {
-    .planet-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .planet-text, .planet-image {
-        max-width: 90%;
-    }
-}
